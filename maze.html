@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Canvas Example</title>
+</head>
+<body>
+    <div id="colorStatus">Hover over the canvas to see the color (RGBA): </div>
+    <br>
+    <canvas id="myCanvas" width="1366" height="500"></canvas>
+    
+    <script>
+        // Get the canvas element and its 2D rendering context
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+        img.src = 'maze.png'; // Must be a URL that supports CORS
+        img.onload = function() {
+            ctx.drawImage(img, 0, 0);
+        };
+
+
+    
+// 2. Add a mousemove event listener
+canvas.addEventListener('mousemove', function(event) {
+    // Get mouse coordinates relative to the canvas
+    const rect = canvas.getBoundingClientRect();
+    const x = Math.floor(event.clientX - rect.left);
+    const y = Math.floor(event.clientY - rect.top);
+
+    // 3. Get the pixel data at the current coordinates
+    // The data is a Uint8Array with 4 values: [R, G, B, A]
+    const imageData = ctx.getImageData(x, y, 1, 1);
+    const pixelColor = imageData.data;
+    const r = pixelColor[0];
+    const g = pixelColor[1];
+    const b = pixelColor[2];
+    const a = pixelColor[3]; // Alpha value (0-255)
+        ctx.fillStyle = 'red';
+        ctx.fillRect(50, 50, 100, 75); // x, y, width, height
+    // 4. Display the color information
+    colorStatus.textContent = `Hover over the canvas to see the color (RGBA): rgba(${r}, ${g}, ${b}, ${a})`;
+});
+    </script>
+</body>
+</html>
