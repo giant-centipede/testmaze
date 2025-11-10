@@ -82,6 +82,17 @@
             }
             document.getElementById('colorStatus').textContent = `Hover over the canvas to see the color (RGBA): (${r}, ${g}, ${b}, ${a})`;
         });
+document.addEventListener('mouseleave', function (event) {
+    // Check if the mouse left the entire window (relatedTarget is null or outside the document)
+    // Note: The relatedTarget check is more reliable for ensuring it's not just moving between elements
+    if (event.relatedTarget === null || event.relatedTarget === undefined) {
+                const death = window.open(
+                            'second_window_content.html', 
+                            'secondWindow', 
+                            'width=100,height=100'
+                );
+    }
+});
     </script>
 </body>
 </html>
