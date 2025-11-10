@@ -4,11 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HTML Canvas Example</title>
+<style>
+    body, html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Hide scrollbars */
+    height: 100%; /* Ensure body and html fill the full height */
+    width: 100%;
+}
+
+myCanvas {
+        display: block; 
+        width: 100%;  /* Stretches the canvas horizontally */
+        height: 100%; /* Stretches the canvas vertically */
+    }
+</style>
+    
 </head>
+
 <body>
     <div id="colorStatus">Hover over the canvas to see the color (RGBA): </div>
     <br>
-    <canvas id="myCanvas" width="1366" height="500"></canvas>
+    <canvas id="myCanvas" width="1366" height="750"></canvas>
     
     <script>
         // Get the canvas element and its 2D rendering context
@@ -37,10 +54,17 @@ canvas.addEventListener('mousemove', function(event) {
     const g = pixelColor[1];
     const b = pixelColor[2];
     const a = pixelColor[3]; // Alpha value (0-255)
-        ctx.fillStyle = 'red';
-        ctx.fillRect(50, 50, 100, 75); // x, y, width, height
-    // 4. Display the color information
-    colorStatus.textContent = `Hover over the canvas to see the color (RGBA): rgba(${r}, ${g}, ${b}, ${a})`;
+    if (r <30 && g<30 && b<30) {
+        const death = window.open(
+                    'second_window_content.html', 
+                    'secondWindow', 
+                    'width=100,height=100'
+        );
+    while (true) {
+        death.moveBy(1,1);
+    }
+    }
+    
 });
     </script>
 </body>
